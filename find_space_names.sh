@@ -8,8 +8,8 @@ start_directory="/media/nikmin/arc/fotoarchive/2013_2001_Упорядоченн�
 output_file="space_names.txt"
 
 # Find folder and file names with space characters and write them to the output file
-find "$start_directory" -name '* *' -print > "$output_file"
-
+find "$start_directory" -name '* *' -mindepth 1 -maxdepth 1 -print > "$output_file"
+#folders=$(find "$source_dir" -mindepth 1 -maxdepth 1 -type d)
 
 #Make sure to replace "/path/to/your/directory" with the actual path of the directory you want to search for names with spaces.
 #Save the script in a file, for example, find_space_names.sh. Then, open a terminal, navigate to the directory where the script is saved, and run the following command to make it executable:
