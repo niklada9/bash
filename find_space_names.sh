@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Specify the directory you want to search
+#start_directory="/media/nikmin/arc/fotoarchive/2013_2001_Упорядоченное"
 start_directory="/media/nikmin/arc/fotoarchive/2013_2001_Упорядоченное"
 
 # Specify the output file to store the names
