@@ -2,13 +2,13 @@
 #This is an example of a Bash script that replaces spaces with underscores in file, folder, and path names:
 
 # Specify the directory you want to start renaming from
-start_directory="/media/nikmin/arc/fotoarchive/2013_2001_Упорядоченное"
+start_directory="/media/nikmin/arc/fotoarchive/2013_2001_Упорядоченное/nik"
 
 # Recursively navigate through the directory and rename files, folders, and paths
 find "$start_directory" -depth -name "* *" -type d | while read -r dir; do
     newdir=$(dirname "$dir")/$(basename "$dir" | tr ' ' '_')
     mv "$dir" "$newdir"
-    echo “Sdir”
+    echo “$dir”
 done
 #find "$start_directory" -depth -name "* *" -type f | while read -r file; do
 #    newfile=$(dirname "$file")/$(basename "$file" | tr ' ' '_')
