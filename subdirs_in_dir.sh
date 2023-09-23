@@ -1,18 +1,22 @@
 #!/bin/bash
 
-target_dir="/путь/к/конечному/каталогу"
+# начальный каталог, из которого будем искать файлы
+src_dir="./source_directory"
 
-find /путь/к/начальному/каталогу -type f | while read file; do
-    # Получаем имя подкаталога
-    dir_name=$(dirname "$file")
-    dir_name=$(basename "$dir_name")
+# каталог, в который будем перемещать файлы
+dst_dir="./destination_directory"
 
-    # Получаем имя файла
-    file_name=$(basename "$file")
+# создаем конечный каталог, если он еще не существует
+mkdir -p "$dst_dir"
 
-    # Формируем новое имя файла
-    new_file_name="${dir_name}_${file_name}"
-
-    # Перемещаем и переименовываем файл
-    mv "$file" "$target_dir/$new_file_name"
+# перебираем все файлы в подкаталогах начального каталога
+find "$src_dir" -type f | while read -r file; do
+  # извлекаем путь подкаталога относительно начального каталога
+  sub_dir=$(dirname "${file#$src_dir}")
+  
+  # формируем новое имя файла
+  new_name="${sub_dir//\//_}${file##*/}"
+  
+  # перемещаем и переименовываем файл
+  mv "$file" "$dst_dir/$new_name"
 done
