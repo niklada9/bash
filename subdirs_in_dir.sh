@@ -26,3 +26,22 @@ done
 # By combining these two parts, the expression assigns a new value to the new_name variable. It creates a file name by combining the modified value of sub_dir (with forward slashes replaced by underscores) and the extracted file name from file.
 # For example, if sub_dir is "path/to" and file is "file.txt", the resulting value of new_name would be "path_to_file.txt".
 
+
+#!/bin/bash
+
+target_dir="/путь/к/конечному/каталогу"
+
+find /путь/к/начальному/каталогу -type f | while read file; do
+    # Получаем имя подкаталога
+    dir_name=$(dirname "$file")
+    dir_name=$(basename "$dir_name")
+
+    # Получаем имя файла
+    file_name=$(basename "$file")
+
+    # Формируем новое имя файла с добавлением имени подкаталога
+    new_file_name="${dir_name}_${file_name}"
+
+    # Перемещаем и переименовываем файл
+    mv "$file" "$target_dir/$new_file_name"
+done
