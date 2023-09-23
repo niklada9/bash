@@ -15,7 +15,7 @@ find "$src_dir" -type f | while read -r file; do
   sub_dir=$(dirname "${file#$src_dir}")
   
   # формируем новое имя файла
-  new_name="${sub_dir//\//_}${file##*/}"
+  new_name="${sub_dir//\//@}${file##*/}"
   
   # перемещаем и переименовываем файл
   mv "$file" "$dst_dir/$new_name"
