@@ -10,6 +10,8 @@ find "$start_directory" -depth -name "* *" -type d | while read -r dir; do
     mv "$dir" "$newdir"
     echo “$dir”
 done
+
+# Второй вариант
 #find "$start_directory" -depth -name "* *" -type f | while read -r file; do
 #    newfile=$(dirname "$file")/$(basename "$file" | tr ' ' '_')
 #    mv "$file" "$newfile"
