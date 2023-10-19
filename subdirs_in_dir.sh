@@ -1,47 +1,26 @@
 #!/bin/bash
-# Скрипт для вывода файлов из подкаталогов в корневой каталог с переименованием файлов в вид subfolder@file
+
 # начальный каталог, из которого будем искать файлы
-src_dir="./source_directory"
+src_dir="./tmp_nik"
 
 # каталог, в который будем перемещать файлы
-dst_dir="./destination_directory"
+dst_dir="./tmp_nik_all"
+# разделитель между путем и именем файла
+delimeter='@'
 
 # создаем конечный каталог, если он еще не существует
-mkdir -p "$dst_dir"
+#mkdir -p "$dst_dir"
 
 # перебираем все файлы в подкаталогах начального каталога
 find "$src_dir" -type f | while read -r file; do
-  # извлекаем путь подкаталога относительно начального каталога
+ # извлекаем путь подкаталога относительно начального каталога
   sub_dir=$(dirname "${file#$src_dir}")
-  
-  # формируем новое имя файла
-  new_name="${sub_dir//\//@}${file##*/}"
-  
-  # перемещаем и переименовываем файл
+ #заменяем слэши на собачки
+  sub_dir_name_t=${sub_dir//\//@}
+ #убираем собачку в начале строки
+  sub_dir_name=${sub_dir_name_t/@/}
+ # формируем новое имя файла
+  new_name="${sub_dir_name}${delimeter}${file##*/}"
+ # перемещаем и переименовываем файл
   mv "$file" "$dst_dir/$new_name"
-done
-# The expression new_name="${sub_dir//\//_}${file##*/}" consists of two parts: the value of sub_dir and the value of file. Let's break down each part:
-# ${sub_dir//\//_}: This part is using a parameter expansion syntax in Bash. It replaces all occurrences of the forward slash (/) in the value of sub_dir with an underscore (). The forward slash (/) and the underscore () are characters used in the replacement pattern.
-# ${file##*/}: This part is also using a parameter expansion syntax in Bash. It extracts the file name from the value of file by removing all characters until the last occurrence of the forward slash (/). The double hash (##) is used to perform a greedy deletion, meaning it removes the longest match. The asterisk (*) is a wildcard that matches any number of characters.
-# By combining these two parts, the expression assigns a new value to the new_name variable. It creates a file name by combining the modified value of sub_dir (with forward slashes replaced by underscores) and the extracted file name from file.
-# For example, if sub_dir is "path/to" and file is "file.txt", the resulting value of new_name would be "path_to_file.txt".
-
-
-#!/bin/bash
-
-target_dir="/путь/к/конечному/каталогу"
-
-find /путь/к/начальному/каталогу -type f | while read file; do
-    # Получаем имя подкаталога
-    dir_name=$(dirname "$file")
-    dir_name=$(basename "$dir_name")
-
-    # Получаем имя файла
-    file_name=$(basename "$file")
-
-    # Формируем новое имя файла с добавлением имени подкаталога
-    new_file_name="${dir_name}_${file_name}"
-
-    # Перемещаем и переименовываем файл
-    mv "$file" "$target_dir/$new_file_name"
 done
