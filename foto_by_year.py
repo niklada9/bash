@@ -1,30 +1,33 @@
 import os
 import shutil
 from PIL import Image
+import exifread
 
-def extract_date_taken(filename):
-    try:
-        image = Image.open(filename)
-        exif_data = image._getexif()
-        if exif_data is not None and 36867 in exif_data:
-            date_taken = exif_data[36867]
-            return date_taken
-    except (AttributeError, KeyError, IndexError, IOError):
-        pass
+# Функция для извлечения даты съемки из метаданных EXIF
+def get_capture_date(file_path):
+    with open(file_path, 'rb') as f:
+        tags = exifread.process_file(f)
+        if 'EXIF DateTimeOriginal' in tags:
+            return str(tags['EXIF DateTimeOriginal'])
     return None
 
-def move_photo_to_year_folder(filename):
-    date_taken = extract_date_taken(filename)
-    if date_taken is not None:
-        year = date_taken[:4]
-        destination_folder = os.path.join(os.getcwd(), year)
-        if not os.path.exists(destination_folder):
-            os.makedirs(destination_folder)
-        shutil.move(filename, destination_folder)
+# Папка, из которой будут извлекаться фотографии
+source_folder = 'путь_к_исходной_папке'
+# Папка, в которую будут отправляться фотографии
+destination_folder = 'путь_к_папке_года'
 
-# Пример использования скрипта:
-folder_path = "путь_к_папке_с_фотографиями"
-for filename in os.listdir(folder_path):
-    if filename.endswith(".jpg") or filename.endswith(".jpeg"):
-        file_path = os.path.join(folder_path, filename)
-        move_photo_to_year_folder(file_path)
+for root, _, files in os.walk(source_folder):
+    for filename in files:
+        if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+            file_path = os.path.join(root, filename)
+            capture_date = get_capture_date(file_path)
+            if capture_date:
+                year = capture_date[:4]
+                year_folder = os.path.join(destination_folder, year)
+                if not os.path.exists(year_folder):
+                    os.makedirs(year_folder)
+                destination_path = os.path.join(year_folder, filename)
+                shutil.copy(file_path, destination_path)
+                print(f"Файл {filename} перемещен в папку {year}")
+
+print("Готово.")
