@@ -30,4 +30,4 @@ if __name__ == "__main__":
     folder_path = "/media/nikmin/arc/ya_disk/upo"  # Change this to your folder path
     replace_spaces_with_underscores(folder_path)
 
-    # OSError: [Errno 39] Directory not empty: '/media/nikmin/arc/ya_disk/upo/2007_05_07 Piter_JJ' -> '/media/nikmin/arc/ya_disk/upo/2007_05_07_Piter_JJ'
+ # OSError: [Errno 39] Directory not empty: '/media/nikmin/arc/ya_disk/upo/2007_05_07 Piter_JJ' -> '/media/nikmin/arc/ya_disk/upo/2007_05_07_Piter_JJ'
