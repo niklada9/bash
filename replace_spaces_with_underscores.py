@@ -12,6 +12,14 @@ def replace_spaces_with_underscores(folder_path):
             new_dir_name = dir_name.replace(" ", "_")
             new_dir_path = os.path.join(root, new_dir_name)
 
+            # Check for existing folder with the same name
+            counter = 2
+            while os.path.exists(new_dir_path):
+                base_name, extension = os.path.splitext(new_dir_name)
+                new_dir_name = f"{base_name}_{counter}{extension}"
+                new_dir_path = os.path.join(root, new_dir_name)
+                counter += 1
+
             if original_dir_path != new_dir_path:
                 os.rename(original_dir_path, new_dir_path)
                 print(f"Renamed folder: {original_dir_path} -> {new_dir_path}")
@@ -21,6 +29,14 @@ def replace_spaces_with_underscores(folder_path):
             original_file_path = os.path.join(root, file_name)
             new_file_name = file_name.replace(" ", "_")
             new_file_path = os.path.join(root, new_file_name)
+
+            # Check for existing file with the same name
+            counter = 2
+            while os.path.exists(new_file_path):
+                base_name, extension = os.path.splitext(new_file_name)
+                new_file_name = f"{base_name}_{counter}{extension}"
+                new_file_path = os.path.join(root, new_file_name)
+                counter += 1
 
             if original_file_path != new_file_path:
                 os.rename(original_file_path, new_file_path)
