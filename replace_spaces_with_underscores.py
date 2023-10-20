@@ -1,4 +1,4 @@
-# Replace "/path/to/your/folder" with the actual path to the folder where you want to replace spaces with underscores in file and folder names. 
+# Replace "/media/nikmin/arc/ya_disk/2013_2001_Упорядоченное" with the actual path to the folder where you want to replace spaces with underscores in file and folder names.
 # This script will recursively go through all subdirectories and replace spaces with underscores in both folder and file names.
 
 
@@ -27,5 +27,7 @@ def replace_spaces_with_underscores(folder_path):
                 print(f"Renamed file: {original_file_path} -> {new_file_path}")
 
 if __name__ == "__main__":
-    folder_path = "/path/to/your/folder"  # Change this to your folder path
+    folder_path = "/media/nikmin/arc/ya_disk/upo"  # Change this to your folder path
     replace_spaces_with_underscores(folder_path)
+
+    # OSError: [Errno 39] Directory not empty: '/media/nikmin/arc/ya_disk/upo/2007_05_07 Piter_JJ' -> '/media/nikmin/arc/ya_disk/upo/2007_05_07_Piter_JJ'
