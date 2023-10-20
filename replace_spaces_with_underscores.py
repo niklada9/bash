@@ -55,7 +55,7 @@ def replace_spaces_with_underscores(folder_path):
                 print(f"Renamed file: {original_file_path} -> {new_file_path}")
 
 if __name__ == "__main__":
-    folder_path = "/path/to/your/folder"  # Change this to your folder path
+    folder_path = "/media/nikmin/arc/ya_disk/upo"  # Change this to your folder path
     replace_spaces_with_underscores(folder_path)
 
 

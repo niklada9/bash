@@ -33,7 +33,7 @@ def rename_files_with_folder_name(folder_path):
             print(f"Renamed: {file} -> {new_name}")
 
 if __name__ == "__main__":
-    folder_path = "/path/to/your/folder"  # Change this to your folder path
+    folder_path = "/media/nikmin/arc/ya_disk/upo"  # Change this to your folder path
     rename_files_with_folder_name(folder_path)
 # write Python code to extact files from folder and rename them to add folder name in front of old file name with separate both part of new name with @ 
 # 
