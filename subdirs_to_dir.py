@@ -23,7 +23,7 @@ def move_files_to_target(source_folder, target_folder):
             print(f"Moved file: {source_file_path} -> {target_file_path}")
 
 if __name__ == "__main__":
-    source_folder = "/path/to/source_folder"  # Замените на исходную папку
-    target_folder = "/path/to/target_folder"  # Замените на целевую папку
+    source_folder = "/media/nikmin/arc/ya_disk/upo"  # Замените на исходную папку
+    target_folder = "/media/nikmin/arc/ya_disk/upa"  # Замените на целевую папку
 
     move_files_to_target(source_folder, target_folder)
