@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # начальный каталог, из которого будем искать файлы
-src_dir="./tmp_nik"
+src_dir="/media/nikmin/arc/test"
 
 # каталог, в который будем перемещать файлы
-dst_dir="./tmp_nik_all"
+dst_dir="/media/nikmin/arc/test_output/"
 # разделитель между путем и именем файла
 delimeter='@'
 

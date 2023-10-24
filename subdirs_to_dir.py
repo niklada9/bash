@@ -1,29 +1,45 @@
 
-# Вы можете использовать Python и модуль shutil для переноса файлов из исходной папки и ее подпапок в целевую папку, 
-# а также добавлять "_3" (или более) к именам файлов в случае конфликта. 
+# Here's a script that extracts files from a source folder, renames them by adding the names
+# of the folders and subfolders to the file name using the "@" separator, and moves them to a target folder:
+# You can achieve task using Python with the os and shutil modules.
+# get_available_name function generates a unique name in the target folder by appending "_1", "_2",
+# and so on if a file with the same name already exists.
+
 
 import os
 import shutil
 
-def move_files_to_target(source_folder, target_folder):
-    for root, dirs, files in os.walk(source_folder):
-        for file_name in files:
-            source_file_path = os.path.join(root, file_name)
-            target_file_path = os.path.join(target_folder, file_name)
+def process_files(source_folder, target_folder):
+    for root, _, files in os.walk(source_folder):
+        for file in files:
+            source_path = os.path.join(root, file)
+            relative_path = os.path.relpath(source_path, source_folder)
+            new_name = "@".join(relative_path.split(os.path.sep)[:-1]) + "@" + file
+            target_path = os.path.join(target_folder, new_name)
+            os.makedirs(os.path.dirname(target_path), exist_ok=True)
 
-            # Check for an existing file with the same name in the target folder
-            counter = 2
-            while os.path.exists(target_file_path):
-                base_name, extension = os.path.splitext(file_name)
-                new_file_name = f"{base_name}_{counter}{extension}"
-                target_file_path = os.path.join(target_folder, new_file_name)
-                counter += 1
-
-            shutil.move(source_file_path, target_file_path)
-            print(f"Moved file: {source_file_path} -> {target_file_path}")
+            try:
+                shutil.move(source_path, target_path)
+                print(f"Moved '{source_path}' to '{target_path}'")
+            except shutil.Error as e:
+                print(f"Failed to move '{source_path}': {e}")
 
 if __name__ == "__main__":
-    source_folder = "/media/nikmin/arc/ya_disk/upo"  # Замените на исходную папку
-    target_folder = "/media/nikmin/arc/ya_disk/upa"  # Замените на целевую папку
+    source_folder = "/media/nikmin/arc/test"
+    target_folder = "/media/nikmin/arc/test_output"
 
-    move_files_to_target(source_folder, target_folder)
+    if not os.path.exists(source_folder):
+        print(f"Source folder '{source_folder}' does not exist.")
+    elif not os.path.exists(target_folder):
+        print(f"Target folder '{target_folder}' does not exist.")
+    else:
+        process_files(source_folder, target_folder)
+
+# relative_path - это относительный путь к исходному файлу относительно исходной папки.
+# Он разбивается на список директорий с помощью метода split, используя разделитель os.path.sep,
+# который представляет собой разделитель пути для текущей операционной системы.
+#  [:-1] - это срез списка, который исключает последний элемент списка, который является именем исходного файла.
+#  "@".join() - это метод, который объединяет список директорий в строку, используя символ "@" в качестве разделителя.
+#  + "@" + file - это конкатенация полученной строки с символом "@" и именем исходного файла.
+#  Таким образом, новое имя файла представляет собой список директорий в относительном пути, объединенных символом "@",
+#  за которым следует символ "@", а затем имя исходного файла.

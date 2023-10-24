@@ -6,34 +6,39 @@
 # same name already exists in the directory.
 
 import os
+import shutil
 
-# Function to process files in a folder
-def rename_files_with_folder_name(folder_path):
-    if not os.path.exists(folder_path) or not os.path.isdir(folder_path):
-        print(f"Folder '{folder_path}' does not exist.")
-        return
-
-    for root, dirs, files in os.walk(folder_path):
+def rename_and_move_files(source_folder, target_folder):
+    for root, dirs, files in os.walk(source_folder):
         for file in files:
             file_path = os.path.join(root, file)
-            folder_name = os.path.basename(root)
-            new_name = f"{folder_name}@{file}"
-            
-            new_path = os.path.join(root, new_name)
-            
-            # Check if the new file name already exists
-            counter = 2
-            while os.path.exists(new_path):
-                base_name, extension = os.path.splitext(new_name)
-                new_name = f"{base_name}_{counter}{extension}"
-                new_path = os.path.join(root, new_name)
+
+            # Получить относительный путь файла от исходной папки
+            relative_path = os.path.relpath(file_path, source_folder)
+
+            # Построить новое имя файла, объединяя имя файла и иерархию папок
+            new_name = relative_path.replace(os.path.sep, '@')
+
+            # Проверить, существует ли файл с таким именем в целевой папке
+            target_path = os.path.join(target_folder, new_name)
+            base, ext = os.path.splitext(target_path)
+            counter = 1
+
+            while os.path.exists(target_path):
+                target_path = f"{base}_{counter}{ext}"
                 counter += 1
-            
-            os.rename(file_path, new_path)
-            print(f"Renamed: {file} -> {new_name}")
+
+            # Скопировать и переименовать файл в целевую папку
+            shutil.copy(file_path, target_path)
 
 if __name__ == "__main__":
-    folder_path = "/media/nikmin/arc/ya_disk/upo"  # Change this to your folder path
-    rename_files_with_folder_name(folder_path)
+    source_folder = "/media/nikmin/arc/_2013_Summary"
+    target_folder = "/media/nikmin/arc/_2013_Summary_output"
+
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
+
+    rename_and_move_files(source_folder, target_folder)
+
 # write Python code to extact files from folder and rename them to add folder name in front of old file name with separate both part of new name with @ 
 # 
