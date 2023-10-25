@@ -32,8 +32,8 @@ def rename_and_move_files(source_folder, target_folder):
             shutil.copy(file_path, target_path)
 
 if __name__ == "__main__":
-    source_folder = "/media/nikmin/arc/_2013_Summary"
-    target_folder = "/media/nikmin/arc/_2013_Summary_output"
+    source_folder = "/media/nikmin/arc/PhotosOpenShare"
+    target_folder = "/media/nikmin/arc/PhotosOpenShare_output"
 
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)

@@ -1,62 +1,43 @@
-# Replace "/media/nikmin/arc/ya_disk/2013_2001_Упорядоченное" with the actual path to the folder where you want to replace spaces with underscores in file and folder names.
-# This script will recursively go through all subdirectories and replace spaces with underscores in both folder and file names.
-
+# You can use the following Python script to recursively replace space signs with underscore signs
+# in folder and file names while handling naming collisions by adding _1, _2, etc. to the new names when necessary.
+# Make sure you have a backup of your data before running such a script, as it can modify file and folder names.
+# This script uses os.walk to traverse through the directory structure, renames both directories and files,
+# and handles naming collisions by adding _1, _2, etc. to the new names. Please exercise caution when using this script,
+# especially on important directories, as it can change file and folder names.
+# !!! Make sure you have a backup of your data before running it.
 
 import os
-import shutil
 
-def replace_spaces_with_underscores(folder_path):
-    for root, dirs, files in os.walk(folder_path):
-        # Rename folders
-        for dir_name in dirs:
-            original_dir_path = os.path.join(root, dir_name)
-            new_dir_name = dir_name.replace(" ", "_")
-            new_dir_path = os.path.join(root, new_dir_name)
+def replace_spaces_with_underscores(path):
+    for root, dirs, files in os.walk(path):
+        for d in dirs:
+            original_dir = os.path.join(root, d)
+            new_dir = os.path.join(root, d.replace(" ", "_"))
+            if original_dir != new_dir and os.path.exists(new_dir):
+                i = 1
+                while os.path.exists(new_dir):
+                    i += 1
+                    new_dir = os.path.join(root, f"{d.replace(' ', '_')}_{i}")
+            os.rename(original_dir, new_dir)
 
-            # Check for existing folder with the same name
-            counter = 2
-            while os.path.exists(new_dir_path):
-                base_name, extension = os.path.splitext(new_dir_name)
-                new_dir_name = f"{base_name}_{counter}{extension}"
-                new_dir_path = os.path.join(root, new_dir_name)
-                counter += 1
-
-            if original_dir_path != new_dir_path:
-                try:
-                    os.rename(original_dir_path, new_dir_path)
-                    print(f"Renamed folder: {original_dir_path} -> {new_dir_path}")
-                except OSError:
-                    # If renaming fails, merge the contents of both directories
-                    for item in os.listdir(original_dir_path):
-                        src = os.path.join(original_dir_path, item)
-                        dst = os.path.join(new_dir_path, item)
-                        if os.path.isdir(src):
-                            shutil.move(src, dst)
-                        else:
-                            shutil.copy2(src, dst)
-                    shutil.rmtree(original_dir_path)
-
-        # Rename files
-        for file_name in files:
-            original_file_path = os.path.join(root, file_name)
-            new_file_name = file_name.replace(" ", "_")
-            new_file_path = os.path.join(root, new_file_name)
-
-            # Check for an existing file with the same name
-            counter = 2
-            while os.path.exists(new_file_path):
-                base_name, extension = os.path.splitext(new_file_name)
-                new_file_name = f"{base_name}_{counter}{extension}"
-                new_file_path = os.path.join(root, new_file_name)
-                counter += 1
-
-            if original_file_path != new_file_path:
-                os.rename(original_file_path, new_file_path)
-                print(f"Renamed file: {original_file_path} -> {new_file_path}")
+        for f in files:
+            original_file = os.path.join(root, f)
+            new_file = os.path.join(root, f.replace(" ", "_"))
+            if original_file != new_file and os.path.exists(new_file):
+                i = 1
+                while os.path.exists(new_file):
+                    i += 1
+                    base_name, extension = os.path.splitext(f)
+                    new_file = os.path.join(root, f"{base_name.replace(' ', '_')}_{i}{extension}")
+            os.rename(original_file, new_file)
 
 if __name__ == "__main__":
-    folder_path = "/home/nikmin/lacie_mountpoint/OpenShare/Photos99/_2013_Summary"  # Change this to your folder path
-    replace_spaces_with_underscores(folder_path)
+    #directory_path = input("Enter the directory path: ")
+    directory_path = "/media/nikmin/arc/PhotosOpenShare"
+    if os.path.exists(directory_path):
+        replace_spaces_with_underscores(directory_path)
+        print("Spaces replaced with underscores successfully.")
+    else:
+        print("Directory not found.")
 
 
- # OSError: [Errno 39] Directory not empty: '/media/nikmin/arc/ya_disk/upo/2007_05_07 Piter_JJ' -> '/media/nikmin/arc/ya_disk/upo/2007_05_07_Piter_JJ'
