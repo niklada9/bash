@@ -4,8 +4,9 @@
 # This script will walk through all subdirectories, add the folder name in front of each file name separated by @, and rename the files accordingly.
 # This script checks if the file name already exists - and renamed new file name with add "_2", "_3", and so on to the new file name if a file with the 
 # same name already exists in the directory.
-# test test
+# test test this string done on nikmin machine
 
+import sys
 import os
 import shutil
 

@@ -6,6 +6,7 @@
 # especially on important directories, as it can change file and folder names.
 # !!! Make sure you have a backup of your data before running it.
 
+import sys
 import os
 
 def replace_spaces_with_underscores(path):
@@ -32,8 +33,12 @@ def replace_spaces_with_underscores(path):
             os.rename(original_file, new_file)
 
 if __name__ == "__main__":
-    #directory_path = input("Enter the directory path: ")
-    directory_path = "/media/nikmin/arc/Photos"
+    if len(sys.argv) != 2:
+    print("Usage: python3 replace_spaces_with_underscores.py /path/to/dir")
+    sys.exit(1)
+    directory_path = sys.argv[1]
+    # directory_path = input("Enter the directory path: ")
+    # directory_path = "/media/nikmin/arc/Photos"
     if os.path.exists(directory_path):
         replace_spaces_with_underscores(directory_path)
         print("Spaces replaced with underscores successfully.")
