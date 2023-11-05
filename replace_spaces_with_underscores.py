@@ -33,7 +33,7 @@ def replace_spaces_with_underscores(path):
 
 if __name__ == "__main__":
     #directory_path = input("Enter the directory path: ")
-    directory_path = "/media/nikmin/arc/PhotosOpenShare"
+    directory_path = "/media/nikmin/arc/Photos"
     if os.path.exists(directory_path):
         replace_spaces_with_underscores(directory_path)
         print("Spaces replaced with underscores successfully.")

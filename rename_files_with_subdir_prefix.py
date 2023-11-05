@@ -4,6 +4,7 @@
 # This script will walk through all subdirectories, add the folder name in front of each file name separated by @, and rename the files accordingly.
 # This script checks if the file name already exists - and renamed new file name with add "_2", "_3", and so on to the new file name if a file with the 
 # same name already exists in the directory.
+# test test
 
 import os
 import shutil
@@ -32,8 +33,8 @@ def rename_and_move_files(source_folder, target_folder):
             shutil.copy(file_path, target_path)
 
 if __name__ == "__main__":
-    source_folder = "/media/nikmin/arc/PhotosOpenShare"
-    target_folder = "/media/nikmin/arc/PhotosOpenShare_output"
+    source_folder = "/media/nikmin/arc/Photos"
+    target_folder = "/media/nikmin/arc/Photos_output"
 
     if not os.path.exists(target_folder):
         os.makedirs(target_folder)
