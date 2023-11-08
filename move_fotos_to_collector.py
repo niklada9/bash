@@ -24,12 +24,13 @@ def copy_and_rename_files(source_directory, target_directory):
             print(f"Скопирован файл: {file} -> {target_file}")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print("Usage: python3 move_fotos_to_collector.py /path/to/dir")
         sys.exit(1)
     source_directory = sys.argv[1]
+    target_directory = sys.argv[2]
     #source_directory = "/путь/к/исходной/папке"
-    target_directory = "/media/nikmin/arc/test_foto_collector"
+    #target_directory = "/media/nikmin/arc/test_foto_collector"
 
     # Вызываем функцию с параметрами
     copy_and_rename_files(source_directory, target_directory)
