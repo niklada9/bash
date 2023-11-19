@@ -5,7 +5,7 @@
 # Проверка наличия параметра (пути к целевой директории)
 if [ -n "$1" ]; then
     target_directory="$1"
-    echo $target_directory
+    echo "$target_directory"
 else
     echo "replace_spaces.sh путь к целевой директории не указан."
     exit 1
