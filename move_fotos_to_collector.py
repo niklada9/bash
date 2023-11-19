@@ -34,7 +34,7 @@ if __name__ == "__main__":
     # настраиваем логгинг
     logging.basicConfig(filename='/media/nikmin/arc/log.txt', level=logging.INFO)
     if len(sys.argv) != 3:
-        print("Usage: python3 move_fotos_to_collector.py /path/to/dir")
+        print("Usage: python3 move_fotos_to_collector.py /path/to/source_dir /path/to/target_dir")
         sys.exit(1)
     source_directory = sys.argv[1]
     target_directory = sys.argv[2]

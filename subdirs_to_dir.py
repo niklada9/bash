@@ -11,7 +11,7 @@ import shutil
 
 
 def copy_and_rename_files(source_dir, target_directory):
-    # вводим перменную подсчета количества перемещенных файлов
+    # вводим переменную подсчета количества перемещенных файлов
     subdir_to_dir_foto_counter = 0
     if not os.path.exists(target_directory):
         os.mkdir(target_directory)
@@ -41,7 +41,7 @@ def copy_and_rename_files(source_dir, target_directory):
     logging.info(f"Собрано фото в общую папку: {subdir_to_dir_foto_counter}")
 
 
-def main(source_dir):
+def main(source_dir, output_dir):
     # настраиваем логгинг
     logging.basicConfig(filename='/media/nikmin/arc/log.txt', level=logging.INFO)
     # Создаем имя_папки_output на уровень выше
@@ -50,12 +50,13 @@ def main(source_dir):
     # output_directory = "/media/nikmin/USB_1TB/w_output"
     # print(output_directory)
     # Вызываем функцию с параметрами
-    copy_and_rename_files(source_dir, output_directory)
+    copy_and_rename_files(source_dir, output_dir)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 subdirs_to_dir.py /path/to/dir")
+    if len(sys.argv) != 3:
+        print("Usage: python3 subdirs_to_dir.py /path/to/source_dir /path/to/target_dir")
         sys.exit(1)
     source_directory = sys.argv[1]
-    main(source_directory)
+    output_directory = sys.argv[2]
+    main(source_directory, output_directory)

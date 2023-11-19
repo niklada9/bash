@@ -9,7 +9,7 @@ output_directory="/media/nikmin/USB_1TB/w_output"
 
 # Переносим файлы из подпапок в единую папку, с добавлением к имени файла названия папок и подпапок через @
 #output_directory=$(python3 /home/nikmin/PycharmProjects/bash1/subdirs_to_dir.py "$root_dir")
-python3 /home/nikmin/PycharmProjects/bash1/subdirs_to_dir.py "$root_dir"
+python3 /home/nikmin/PycharmProjects/bash1/subdirs_to_dir.py "$root_dir" "output_directory"
 
 # Делаем дедупликацию файлов в единой папке
 /home/nikmin/PycharmProjects/bash1/dedupe.sh "$output_directory"
