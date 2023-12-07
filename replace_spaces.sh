@@ -3,6 +3,7 @@
 
 # Specify the directory you want to start renaming from
 # Проверка наличия параметра (пути к целевой директории)
+echo "начинаем заменять пробелы нижними подчеркиваниями"
 if [ -n "$1" ]; then
     target_directory="$1"
     echo "$target_directory"
