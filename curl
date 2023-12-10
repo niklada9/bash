@@ -1,2 +1,0 @@
-curl -T /media/nikmin/arc/test_foto_collector/* ftp://ns2.local/OpenShare -r 0-999999999 --ftp-create-dirs --user admin:c9XXrw67
-curl -T /media/nikmin/arc/test_foto_collector/* /media/nikmin/arc/test_foto_collector_1/ -r 0-999999999
