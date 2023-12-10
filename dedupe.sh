@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -n "$1" ]; then
+# дедупликация файлов общей папки, куда собраны файлы из подпапок с переименованием
     target_directory="$1"
     # echo "$target_directory"
 else
