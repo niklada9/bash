@@ -45,7 +45,7 @@ def copy_and_rename_files(source_dir, target_directory):
 
 def main(source_dir, output_dir):
     # настраиваем логгинг
-    logging.basicConfig(filename='/media/nikmin/arc/log.txt', level=logging.INFO)
+    logging.basicConfig(filename='/media/nikmin/USB_1TB/log.txt', level=logging.INFO)
     # Создаем имя_папки_output на уровень выше
     # parent_directory = os.path.dirname(source_directory)
     # output_directory = os.path.join(parent_directory, os.path.basename(source_directory) + "_output")

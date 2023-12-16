@@ -33,7 +33,7 @@ def copy_and_rename_files(source_dir, target_dir):
 
 if __name__ == "__main__":
     # настраиваем логгинг
-    logging.basicConfig(filename='/media/nikmin/arc/log.txt', level=logging.INFO)
+    logging.basicConfig(filename='/media/nikmin/USB_1TB/log.txt', level=logging.INFO)
     if len(sys.argv) != 3:
         print("Usage: python3 move_fotos_to_collector.py /path/to/source_dir /path/to/target_dir")
         sys.exit(1)
