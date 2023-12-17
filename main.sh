@@ -28,4 +28,4 @@ python3 $exec_dir"move_fotos_to_collector.py" "$output_dir" "$collector"
 $exec_dir"dedupe.sh" "$collector" "target_dir"
 
 # Удаляем промежуточные папки и файлы
-# rm -r "$output_dir"
+rm -r "$output_dir"
