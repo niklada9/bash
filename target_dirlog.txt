@@ -1,0 +1,4 @@
+дедуплицировано в директории /media/nikmin/USB_1TB/w_output:
+707 target_dirdedupe.txt
+дедуплицировано в директории /media/nikmin/USB_1TB/j_collector/:
+1 target_dirdedupe.txt
